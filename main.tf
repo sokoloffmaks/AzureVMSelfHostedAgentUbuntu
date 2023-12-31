@@ -144,7 +144,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
       "wget https://vstsagentpackage.azureedge.net/agent/3.232.1/vsts-agent-linux-x64-3.232.1.tar.gz",
       "mkdir myagent && cd myagent",
       "tar zxvf ../vsts-agent-linux-x64-3.232.1.tar.gz",
-      "echo Y | ./config.sh --url https://dev.azure.com/wvdlabs --auth pat --token *insert_your_PAT_here* --pool *insert_your_azdo_pool_here* --agent $(hostname) --replace",
+      "echo Y | ./config.sh --url *insert_your_azdo_here* --auth pat --token *insert_your_PAT_here* --pool *insert_your_azdo_pool_here* --agent $(hostname) --replace",
       "sudo ./svc.sh install",
       "sudo ./svc.sh start"
     ]
