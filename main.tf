@@ -130,11 +130,13 @@ resource "azurerm_linux_virtual_machine" "vm" {
     inline = [
       "wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb",
       "sudo dpkg -i packages-microsoft-prod.deb",
+      # First apt-get update after adding Microsoft packages
       "sudo apt-get update",
       "sudo apt-get install -y apt-transport-https dotnet-sdk-6.0 git",
       "curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash",
       "curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -",
       "curl https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list",
+      # Second apt-get update after adding new sources
       "sudo apt-get update",
       "sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev",
       "echo 'export PATH=\"$PATH:/opt/mssql-tools/bin\"' >> ~/.bashrc",
